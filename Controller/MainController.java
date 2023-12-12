@@ -17,13 +17,13 @@ public class MainController {
         System.out.println("B    B  L      A   A  C      K  K  J  J    A   A  C      K  K ");
         System.out.println("BBBBB   LLLLL  A   A  CCCCC  K   K  JJ     A   A  CCCCC  K   K");
 
-        System.out.println("¡Bienvenido al Casino La Caprichosa!");
+        System.out.println("¡Bienvenido al Casino La Maleducada!");
 
         int numPlayers = 0;
         do {
             System.out.print("Ingrese el número de jugadores (máximo 4): ");
             try {
-                numPlayers = Integer.parseInt(teclado.nextLine());
+                numPlayers = Integer.parseInt(teclado.nextLine()); //Integrer.parseInt sirve para convertir una cadena de texto, en un numero entero
                 if (numPlayers < 1 || numPlayers > 4) {
                     System.out.println("Error: Ingrese un número válido entre 1 y 4.");
                 }
@@ -110,7 +110,7 @@ public class MainController {
 
             if (playerScore > 21) {
                 System.out.println("¡" + player.getName() + " ha perdido!");
-            } else if (Wn || (IAScore <= 21 && IAScore > playerScore)) {
+            } else if (Wn || (IAScore < 21 && IAScore > playerScore)) {
                 System.out.println("¡" + player.getName() + " pierde ante el Crupier!");
             } else if (playerScore == IAScore) {
                 System.out.println("¡Es un empate entre " + player.getName() + " y el Crupier!");

@@ -7,7 +7,7 @@ public class Deck {
     public Deck() {
         cards = new ArrayList<Card>();
         String[] suits = {"♥", "♦", "♠", "♣"};
-        String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K", "A"};
+        String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 
         for (String suit : suits) {
             for (String rank : ranks) {

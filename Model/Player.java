@@ -27,11 +27,15 @@ public class Player {
             }
         }
 
-        // Si hay Ases y el puntaje supera 21, se asume que al menos uno es un 1.
+        // Asumir que el As tiene un valor de 11 inicialmente
+        int valorAs = 11;
+
+// Si hay Ases y el puntaje supera 11, se asume que al menos uno es un 1.
         while (score > 21 && numAs > 0) {
-            score -= 10;
+            score -= (valorAs - 1); // Restar la diferencia para cambiar de 11 a 1
             numAs--;
         }
+
 
         return score;
     }
