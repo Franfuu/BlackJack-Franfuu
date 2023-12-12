@@ -1,23 +1,17 @@
 package Controller;
 
 import Model.*;
-
+import View.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static View.Menu.Cartel;
+
 public class MainController {
-    public static void main(String[] args) {
+    public static void StartApp() {
         Scanner teclado = new Scanner(System.in);
-
-
-        System.out.println("BBBBB   L      AAAAA  CCCCC  K   K  JJJJJ  AAAAA  CCCCC  K   K");
-        System.out.println("B    B  L      A   A  C      K  K     J    A   A  C      K  K ");
-        System.out.println("BBBBB   L      AAAAA  C      KKK      J    AAAAA  C      KKK  ");
-        System.out.println("B    B  L      A   A  C      K  K  J  J    A   A  C      K  K ");
-        System.out.println("BBBBB   LLLLL  A   A  CCCCC  K   K  JJ     A   A  CCCCC  K   K");
-
-        System.out.println("¡Bienvenido al Casino La Maleducada!");
+        Cartel();
 
         int numPlayers = 0;
         do {
@@ -138,6 +132,8 @@ public class MainController {
 
         teclado.close();
     }
+
+
 
     private static boolean isValidName(String playerName, List<String> existingNames) {
         // Validar que el nombre no esté repetido o vacío
