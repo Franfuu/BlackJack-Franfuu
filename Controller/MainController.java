@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 
 import static View.Menu.FirstMessage;
+import static View.Menu.LastMessage;
 
 public class MainController {
     public static void StartApp() {
@@ -71,17 +72,23 @@ public class MainController {
                 System.out.print(player.getName() + ", ¿Quieres tomar otra carta? (s/n): ");
                 String AnsCard = teclado.nextLine();
 
-                if (AnsCard.equals("s")) {
-                    player.addCard(deck.drawCard());
-                    if (player.getScore() > 21) {
-                        System.out.println("¡Te has pasado de 21! " + player.getName() + " ha perdido.");
+                // Se fuerza al jugador a poner S (para seguir) o N (para dejar de recibir cartas)
+                if (AnsCard.equals("s") || AnsCard.equals("n")) {
+                    if (AnsCard.equals("s")) {
+                        player.addCard(deck.drawCard());
+                        if (player.getScore() > 21) {
+                            System.out.println("¡Te has pasado de 21! " + player.getName() + " ha perdido.");
+                            continuePlaying = false;
+                        }
+                    } else {
                         continuePlaying = false;
                     }
                 } else {
-                    continuePlaying = false;
+                    System.out.println("Por favor, ingresa 's' o 'n' solamente.");
                 }
             }
         }
+
 
         // Turno de la IA
         Player IA = new Player("Dealer");
@@ -108,6 +115,7 @@ public class MainController {
 
             if (IAScore > 21) {
                 System.out.println("El Crupier se ha pasado de 21. ¡Todos los jugadores ganan!");
+                LastMessage();
             } else if (playerScore > 21) {
                 System.out.println("¡" + player.getName() + " ha perdido!");
             } else if (Wn || (IAScore < 21 && IAScore > playerScore)) {
@@ -123,7 +131,6 @@ public class MainController {
 
         teclado.close();
     }
-
 
 
     private static boolean isValidName(String playerName, List<String> existingNames) {
