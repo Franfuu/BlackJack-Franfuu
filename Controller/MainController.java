@@ -1,17 +1,17 @@
 package Controller;
 
 import Model.*;
-import View.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static View.Menu.Cartel;
+
+import static View.Menu.FirstMessage;
 
 public class MainController {
     public static void StartApp() {
         Scanner teclado = new Scanner(System.in);
-        Cartel();
+        FirstMessage();
 
         int numPlayers = 0;
         do {
@@ -39,7 +39,12 @@ public class MainController {
                 playerName = teclado.nextLine().trim();
 
                 validName = isValidName(playerName, playerNames);
-                if (!validName) {
+
+                // Verificar si el nombre es "Crupier"
+                if (playerName.equalsIgnoreCase("Dealer")) {
+                    System.out.println("¡Error! El nombre 'Dealer' no está permitido. Ingrese otro nombre.");
+                    validName = false;  // Forzar la repetición del bucle
+                } else if (!validName) {
                     System.out.println("¡Error! Nombre repetido o vacío. Ingrese un nombre único.");
                 }
             } while (!validName);
@@ -50,7 +55,6 @@ public class MainController {
         }
 
         Deck deck = new Deck();
-
 
         for (Player player : players) {
             player.addCard(deck.drawCard());
@@ -65,9 +69,9 @@ public class MainController {
                 player.displayHand();
 
                 System.out.print(player.getName() + ", ¿Quieres tomar otra carta? (s/n): ");
-                String bj = teclado.nextLine();
+                String AnsCard = teclado.nextLine();
 
-                if (bj.equals("s")) {
+                if (AnsCard.equals("s")) {
                     player.addCard(deck.drawCard());
                     if (player.getScore() > 21) {
                         System.out.println("¡Te has pasado de 21! " + player.getName() + " ha perdido.");
@@ -80,7 +84,7 @@ public class MainController {
         }
 
         // Turno de la IA
-        Player IA = new Player("Crupier");
+        Player IA = new Player("Dealer");
         while (IA.getScore() < 17) {
             IA.addCard(deck.drawCard());
         }
@@ -92,17 +96,19 @@ public class MainController {
         IA.displayHand();
 
 
-// Determinar el ganador
+        // Determinar el ganador
         int IAScore = IA.getScore();
         boolean Wn = IAScore > 21;
 
         System.out.println("Resultados finales:");
 
-// Determinar el ganador entre los jugadores y la IA
+        // Determinar el ganador entre los jugadores y la IA
         for (Player player : players) {
             int playerScore = player.getScore();
 
-            if (playerScore > 21) {
+            if (IAScore > 21) {
+                System.out.println("El Crupier se ha pasado de 21. ¡Todos los jugadores ganan!");
+            } else if (playerScore > 21) {
                 System.out.println("¡" + player.getName() + " ha perdido!");
             } else if (Wn || (IAScore < 21 && IAScore > playerScore)) {
                 System.out.println("¡" + player.getName() + " pierde ante el Crupier!");
@@ -113,22 +119,7 @@ public class MainController {
             }
         }
 
-// Determinar el ganador entre cada jugador y la IA
-        if (IAScore > 21) {
-            System.out.println("El Crupier se ha pasado de 21. ¡Todos los jugadores ganan!");
-        } else {
-            for (Player player : players) {
-                int playerScore = player.getScore();
 
-                if (playerScore <= 21 && playerScore > IAScore) {
-                    System.out.println("¡" + player.getName() + " gana al Crupier!");
-                } else if (playerScore <= 21 && playerScore == IAScore) {
-                    System.out.println("¡" + player.getName() + " empata con el Crupier!");
-                } else {
-                    System.out.println("¡" + player.getName() + " pierde ante el Crupier!");
-                }
-            }
-        }
 
         teclado.close();
     }
