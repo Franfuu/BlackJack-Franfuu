@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 
 import static View.Menu.FirstMessage;
-import static View.Menu.LastMessage;
 
 public class MainController {
     public static void StartApp() {
@@ -115,7 +114,7 @@ public class MainController {
 
             if (IAScore > 21) {
                 System.out.println("El Crupier se ha pasado de 21. ¡Todos los jugadores ganan!");
-                LastMessage();
+
             } else if (playerScore > 21) {
                 System.out.println("¡" + player.getName() + " ha perdido!");
             } else if (Wn || (IAScore < 21 && IAScore > playerScore)) {
@@ -126,8 +125,6 @@ public class MainController {
                 System.out.println("¡" + player.getName() + " gana!");
             }
         }
-
-
 
         teclado.close();
     }
