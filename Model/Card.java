@@ -1,14 +1,18 @@
+// Definición de la clase Card en el paquete Model.
 package Model;
 
+// Clase que representa una carta.
 public class Card {
     String suit;
     String rank;
 
+    // Constructor que inicializa una carta con un palo y un rango.
     public Card(String suit, String rank) {
         this.suit = suit;
         this.rank = rank;
     }
 
+    // Método para obtener el valor numérico de la carta.
     public int getValue() {
         switch (rank) {
             case "2":
@@ -39,9 +43,9 @@ public class Card {
         }
     }
 
+    // Método toString para representar gráficamente la carta.
     @Override
     public String toString() {
-        return"╔════════╗\n" + "  ║ " + rank + "      ║\n" + "  ║        ║\n" + "  ║   " + suit + "    ║\n" + "  ║        ║\n" + "  ║      " + rank + " ║\n" + "  ╚════════╝";
-
+        return "╔════════╗\n" + "  ║ " + rank + "      ║\n" + "  ║        ║\n" + "  ║   " + suit + "    ║\n" + "  ║        ║\n" + "  ║      " + rank + " ║\n" + "  ╚════════╝";
     }
 }
